@@ -1,0 +1,22 @@
+install.packages('stats')
+install.packages('dplyr')
+install.packages('ggplot2')
+install.packages('ggfortify')
+library(stats)
+library(dplyr)
+library(ggplot2)
+library(ggfortify)
+wssplot<-function(data,nc=15,seed=1234){
+wss<-(nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc) {
+set.seed(seed)
+wss<-sum(kmeans(data,centers = i)$withness)}
+plot(1:nc,wss,type="b",xlab="number of clusters",ylab="within group sum of squares")
+wss
+}
+View(iris)
+mydata=select(iris,c(1,2,3,4))
+wssplot(mydata)
+KM=kmeans(mydata,2)
+autoplot(KM,mydata,frame=TRUE)
+KM$centers
