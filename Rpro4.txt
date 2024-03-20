@@ -1,0 +1,14 @@
+install.packages('party')
+library(party)
+mk=infert
+View(mk)
+ind<-sample(2,nrow(mk),replace = TRUE,prob = c(0.7,0.30))
+train.data<-mk[ind==1,]
+test.data<-mk[ind==2,]
+myf<-education~age+parity+induced+case
+infert_ctree<-ctree(myf,data = train.data)
+table(predict(infert_ctree),train.data$education)
+plot(infert_ctree)
+testpred<-predict(infert_ctree,newdata=test.data)
+table(testpred,test.data$education)
+
