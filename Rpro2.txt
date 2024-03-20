@@ -1,0 +1,21 @@
+data("airquality")
+View(airquality)
+#Barplot
+barplot(airquality$Ozone,main = 'MK',xlab = 'Ozone level',horiz = TRUE)
+barplot(airquality$Ozone,main = 'MK',xlab = 'Ozone level',horiz = FALSE)
+#histogram
+hist(airquality$Temp,main = 'MK temp',xlab = 'temp',xlim = c(50,125),freq = FALSE)
+#boxplot
+boxplot(airquality$Wind,main='MK',xlab='hdf',col = 'yellow',border = 'blue',horizontal = TRUE,notch = TRUE)
+boxplot(airquality[,1:2],main='MK')
+#scatterplot
+plot(airquality$Ozone,airquality$Month,main = 'MK',xlab = 'ozone',ylab = 'month',pch=25)
+#heatmap
+Ozone_miss=which(is.na(airquality$Ozone))
+airquality$Ozone[Ozone_miss]=mean(airquality$Ozone,na.rm = TRUE)
+Solar.R_miss=which(is.na(airquality$Solar.R))
+airquality$Solar.R[Solar.R_miss] = mean(airquality$Solar.R,na.rm = TRUE)
+data<-matrix(rnorm(50,0,5),nrow = 10,ncol = 10)
+colnames(data)<-paste0('col',1:10)
+rownames(data)<-paste0("row",1:10)
+heatmap(data)
