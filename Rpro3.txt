@@ -1,0 +1,15 @@
+df=trees[2:3]
+df
+View(df)
+result=cor(df$Height,df$Volume,method = 'pearson')
+cat('pearson is:',result)
+install.packages('caTools')
+library(caTools)
+split=sample.split(df$Height,SplitRatio = 0.7)
+training_set=subset(df,split==TRUE)
+test_set=subset(df,split==FALSE)
+lm.r=lm(formula = Height~Volume,data = training_set)
+coef(lm.r)
+ypred=predict(lm.r,newdata = test_set)
+summary(lm.r)
+
